@@ -5,6 +5,8 @@ output: github_document
 
 ```{r setup, echo = FALSE, message = FALSE}
 library(tidyverse)
+library(readxl)
+library(haven)
 ```
 
 this document will show how to import data
@@ -69,6 +71,30 @@ litters_df = janitor::clean_names(litters_df)
 pull(litters_df, gd0_weight)
 ```
 
+what if we code 'group' as a factor variable
+
+```{r}
+litters_df
+  read_csv(
+    file = "data/FAS_litters.csv",
+    na = c("NA", "", "."),
+    col_types = cols(
+      Group = col_factor()
+    )
+  )
+```
+
+# import an excel file
+
+import the MLB 2011 summary data
+
+```{r}
+mlb_df = read_excel("data/mlb11.xlsx", sheet = mlb11)
+```
+
+```{r}
+pulse_df = read_sas("data/public_pulse_data.sas7bdat")
+```
 
 
 
