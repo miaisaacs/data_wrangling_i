@@ -42,9 +42,33 @@ pups_df
 ```{r, eval = FALSE}
 pups_df = read_csv(file = "~/Desktop/data_wrangling_i/data/FAS_litters.csv")
 ```
-```{r}
+# look at read_csv options
 
+col_names and skipping rows
+
+```{r}
+litters_df
+  read_csv(
+    file = "data/FAS_litters.csv",
+    col_names = FALSE,
+    skip = 1
+  )
 ```
+
+what about missing data
+
+```{r}
+litters_df
+  read_csv(
+    file = "data/FAS_litters.csv",
+    na = c("NA", "", ".")
+  )
+  
+litters_df = janitor::clean_names(litters_df)
+  
+pull(litters_df, gd0_weight)
+```
+
 
 
 
