@@ -30,3 +30,21 @@ tail(litters_df, 10)
 view(litters_df)
 ```
 
+# import FAS pups data (relative and absolute)
+
+```{r}
+pups_df = read_csv("data/FAS_pups.csv")
+
+pups_df = janitor::clean_names(pups_df)
+
+pups_df
+```
+```{r, eval = FALSE}
+pups_df = read_csv(file = "~/Desktop/data_wrangling_i/data/FAS_litters.csv")
+```
+```{r}
+
+```
+
+
+
