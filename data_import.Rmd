@@ -92,9 +92,21 @@ import the MLB 2011 summary data
 mlb_df = read_excel("data/mlb11.xlsx", sheet = mlb11)
 ```
 
+# import sas data
+
 ```{r}
 pulse_df = read_sas("data/public_pulse_data.sas7bdat")
 ```
 
+# never use read.csv()
+
+```{r}
+litters_df = read.csv("data/FAS_litters.csv")
+```
+
+never do this either
+```{r}
+litters_df$L
+```
 
 
