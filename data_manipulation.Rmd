@@ -1,0 +1,37 @@
+---
+title: "Data Manipulation"
+author: "Mia Isaacs"
+date: "2024-09-19"
+output: html_document
+---
+
+# load library
+
+```{r}
+library(tidyverse)
+```
+
+
+# load litters dataset and clean names
+
+```{r}
+options(tibble.print_min = 3)
+
+litters_df = 
+    read_csv("./data/FAS_litters.csv", na = c("NA", ".", ""))
+
+litters_df = 
+    janitor::clean_names(litters_df)
+```
+
+
+# load pups dataset and clean names
+
+```{r}
+pups_df = 
+    read_csv("./data/FAS_pups.csv", na = c("NA", "."))
+    
+pups_df = 
+    janitor::clean_names(pups_df)
+```
+    
