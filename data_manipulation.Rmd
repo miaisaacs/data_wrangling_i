@@ -72,10 +72,35 @@ relocate(litters_df, litter_number, gd0_weight)
 select(pups_df, litter_number, sex, pd_ears)
 ```
 
-
-
 # use filter function
 
+```{r}
+filter(litters_df, gd_of_birth == 20)
+filter(litters_df, gd_of_birth == 19)
+```
+```{r}
+filter(litters_df, pups_born_alive >= 8)
+```
+```{r}
+filter(litters_df, pups_born_alive != 9)
+```
+```{r}
+filter(litters_df, group == "Con7")
+filter(litters_df,  group %in% c("Low7", "Low8"))
+```
+```{r}
+filter(litters_df, group %in% c("Low7", "Low8"),  pups_born_alive == 8)
+```
+```{r}
+drop_na(litters_df,gd0_weight)
+```
+```{r}
+filter(pups_df, sex == 1)
+```
+
+```{r}
+filter(pups_df, sex == 2, pd_walk < 11)
+```
 
 # use mutate function
 
