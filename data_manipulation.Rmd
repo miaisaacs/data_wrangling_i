@@ -7,10 +7,11 @@ output: html_document
 
 # load library
 
-```{r}
+```{r setup, echo = FALSE, message = FALSE}
 library(tidyverse)
 ```
 
+import the two datasets that we're going to manipulate
 
 # load litters dataset and clean names
 
@@ -24,14 +25,68 @@ litters_df =
     janitor::clean_names(litters_df)
 ```
 
-
 # load pups dataset and clean names
 
 ```{r}
 pups_df = 
-    read_csv("./data/FAS_pups.csv", na = c("NA", "."))
+    read_csv("data/FAS_pups.csv", na = c("NA", "."))
     
 pups_df = 
     janitor::clean_names(pups_df)
 ```
     
+# use select function
+
+use select() to select variables
+
+```{r}
+select(litters_df, group, litter_number, gd0_weight, pups_born_alive)
+```
+
+```{r}
+select(litters_df, group:gd_of_birth)
+```
+
+```{r}
+select(litters_df, -pups_survive)
+```
+
+```{r}
+select(litters_df, -(group:gd18_weight))
+```
+```{r}
+select(litters_df, starts_with("gd"))
+
+select(litters_df, contains("pups"))
+```
+```{r}
+select(litters_df, GROUP = group, LiTtEr_NuMbEr = litter_number)
+
+rename(litters_df, GROUP = group, LiTtEr_NuMbEr = litter_number)
+
+select(litters_df, litter_number, gd0_weight, everything())
+
+relocate(litters_df, litter_number, gd0_weight)
+```
+```{r}
+select(pups_df, litter_number, sex, pd_ears)
+```
+
+
+
+# use filter function
+
+
+# use mutate function
+
+
+# use arrange function
+
+
+# PIPING
+
+
+
+
+
+
