@@ -690,6 +690,20 @@ litters_df =
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>pups_df = 
+    read_csv(&quot;./data/FAS_pups.csv&quot;, na = c(&quot;NA&quot;, &quot;.&quot;)) |&gt;
+  janitor::clean_names() |&gt; 
+  filter(sex == 1) |&gt; 
+  select(-pd_ears) |&gt; 
+  mutate(pd_pivot_gt7 = pd_pivot &gt; 7)</code></pre>
+<pre><code>## Rows: 313 Columns: 6
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (1): Litter Number
+## dbl (5): Sex, PD ears, PD eyes, PD pivot, PD walk
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 
 
