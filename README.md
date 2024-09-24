@@ -1,3 +1,3 @@
 # data_wrangling_i
 
-this repo has code from the first data wrangling topic in P8105
+this repo has code from the three data wrangling topics in P8105

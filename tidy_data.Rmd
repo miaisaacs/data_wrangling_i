@@ -1,0 +1,26 @@
+---
+title: "Tidy Data"
+author: "Mia Isaacs"
+date: "2024-09-24"
+output: github_document
+---
+
+# load packages
+
+```{r}
+library(tidyverse)
+
+options(tibble.print_min = 5)
+```
+
+# load pulse data
+
+```{r}
+pulse_df = 
+  haven::read_sas("./data/public_pulse_data.sas7bdat") |>
+  janitor::clean_names()
+
+pulse_df
+```
+
+
