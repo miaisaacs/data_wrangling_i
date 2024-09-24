@@ -7,8 +7,10 @@ output: github_document
 
 # load packages
 
-```{r}
+```{r setup, echo = FALSE, message = FALSE}
 library(tidyverse)
+library(readxl)
+library(haven)
 
 options(tibble.print_min = 5)
 ```
@@ -22,5 +24,72 @@ pulse_df =
 
 pulse_df
 ```
+This needs to go from wide to long format.
 
+```{r}
+pulse_tidy_df = 
+  pivot_longer(
+    pulse_df, 
+    bdi_score_bl:bdi_score_12m,
+    names_to = "visit", 
+    values_to = "bdi_score")
+
+pulse_tidy_df
+```
+
+Remove prefix variable names.
+
+```{r}
+pulse_tidy_df = 
+  pivot_longer(
+    pulse_df, 
+    bdi_score_bl:bdi_score_12m,
+    names_to = "visit", 
+    names_prefix = "bdi_score_",
+    values_to = "bdi")
+
+pulse_tidy_df
+```
+
+Change visit variable.
+
+```{r}
+pulse_df = 
+  haven::read_sas("./data/public_pulse_data.sas7bdat") |>
+  janitor::clean_names() |>
+  pivot_longer(
+    cols = bdi_score_bl:bdi_score_12m,
+    names_to = "visit", 
+    names_prefix = "bdi_score_",
+    values_to = "bdi"
+  ) |>
+  mutate(
+    visit = replace(visit, visit == "bl", "00m"),
+    visit = factor(visit)
+  ) |>
+  relocate(id, visit)
+
+print(pulse_df, n = 12)
+```
+
+Do one more example.
+
+```{r}
+litters_wide = 
+  read_csv(
+    "./data/FAS_litters.csv",
+    na = c("NA", ".", "")) |>
+  janitor::clean_names() |>
+  select(litter_number, ends_with("weight")) |> 
+  pivot_longer(
+    gd0_weight:gd18_weight,
+    names_to = "gd", 
+    values_to = "weight") |> 
+  mutate(
+    gd = case_match(
+      gd,
+      "gd0_weight"  ~ 0,
+      "gd18_weight" ~ 18
+    ))
+```
 
